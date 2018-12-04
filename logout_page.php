@@ -27,14 +27,20 @@
  * @uses print_api.php
  */
 
+require_once( '/var/www/html/mantis/phpCAS/login_cas.php' );
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
 require_api( 'print_api.php' );
 
 # Cache the current logout redirect page as it will be cleared by auth_logout()
-$t_logout_redirect = auth_logout_redirect_page();
+//$t_logout_redirect = auth_logout_redirect_page();
 
-auth_logout();
+//auth_logout();
+phpCAS::setDebug();
+phpCAS::setVerbose(true);
+phpCAS::handleLogoutRequests();
+phpCAS::logout();
 
-print_header_redirect( $t_logout_redirect, true, false );
+//print_header_redirect( $t_logout_redirect, true, false );
+print_header_redirect( config_get( 'logout_redirect_page' ), true, false );

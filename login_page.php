@@ -40,6 +40,7 @@
  * @uses utility_api.php
  */
 
+require_once( '/var/www/html/mantis/phpCAS/login_cas.php' );
 require_once( 'core.php' );
 require_api( 'authentication_api.php' );
 require_api( 'config_api.php' );
@@ -58,6 +59,9 @@ require_css( 'login.css' );
 $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
+if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
+    print_header_redirect( config_get( 'default_home_page' ) );
+}
 $f_username              = gpc_get_string( 'username', '' );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
 $f_secure_session_cookie = gpc_get_cookie( config_get_global( 'cookie_prefix' ) . '_secure_session', null );

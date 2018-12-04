@@ -2000,6 +2000,106 @@ $g_max_dropdown_length = 40;
  * @global integer $g_wrap_in_preformatted_text
  */
 $g_wrap_in_preformatted_text = ON;
+    
+#############################################
+# MantisBT Authentication and CAS Settings  #
+#############################################
+
+/**
+ * @global string $g_cas_server
+ */
+$g_cas_server = '';
+
+/**
+ * @global int $g_cas_port
+ */
+$g_cas_port = 8080;
+
+/**
+ * The CAS path on the server. E.g. '/cas'
+ * @global string $g_cas_uri
+ */
+$g_cas_uri = '';
+
+/**
+ * The CAS validation URL to the server
+ * @global string $g_cas_validation
+ */
+$g_cas_validate = '';
+
+/**
+ * Protocol version 2.0 (to use CAS) or S1 (to use SAML)
+ * @global string $g_cas_version
+ */
+$g_cas_version = '';
+
+/**
+ * Full path incl filename to the cas debug log file
+ * @global string $g_cas_debug
+ */
+$g_cas_debug = '';
+
+/**
+ * When using SAML the CAS can provide user attributes
+ * @global boolean $g_cas_saml_attributes
+ */
+$g_cas_saml_attributes = OFF;
+
+/**
+ * Array with two entries: name => ..., mail => ...
+ * Look in your WEB-INF/deployerConfigContext.xml at the CAS server
+ * @global array $g_cas_saml_map
+ */
+$g_cas_saml_map = array( 'name' => '', 'mail' => '' );
+
+# --- CAS + LDAP -------------
+/**
+ * Translate CAS username through LDAP.
+ * @global $g_cas_use_ldap int
+ */
+$g_cas_use_ldap = ON;
+
+/**
+ * The LDAP field matching the Mantis username.
+ * @global $g_ldap_mantis_udi string
+ */
+$g_ldap_mantis_uid  = 'uid';
+
+/**
+ * Should Mantis update user details from LDAP while authenticating with CAS?
+ * @global $g_cas_ldap_update int
+ */
+$g_cas_ldap_update  = OFF;
+
+/**
+ * E.g. 'cn,userpassword'.
+ * @global $g_cas_ldap_update_fields string
+ */
+$g_cas_ldap_update_fields = '';
+
+/**
+ * E.g. 'realname,password'.
+ * @global $g_cas_ldap_update_map string
+ */
+$g_cas_ldap_update_map    = '';
+
+/**
+ * This is the field in LDAP to use to set the user's language preference.
+ * @global $g_ldap_language_field string
+ */
+$g_ldap_language_field = '';
+
+/**
+ * E.g. 'en,zh_hans,ko'.
+ * @global $g_ldap_language_keys string
+ */
+$g_ldap_language_keys = '';
+
+/**
+ * E.g. 'english,chinese_simplified,korean'.
+ * @global $g_ldap_language_values string
+ */
+$g_cas_ldap_update_values = '';
 
 #############################################
 # MantisBT Authentication and LDAP Settings #
@@ -2007,7 +2107,7 @@ $g_wrap_in_preformatted_text = ON;
 
 /**
  * Login authentication method. Must be one of
- * MD5, LDAP, BASIC_AUTH or HTTP_AUTH.
+ * MD5, LDAP, BASIC_AUTH HTTP_AUTH or CAS.
  * Note: you may not be able to easily switch encryption methods, so this
  * should be carefully chosen at install time. However, MantisBT will attempt
  * to "fall back" to older methods if possible.

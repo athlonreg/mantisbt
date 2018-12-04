@@ -58,7 +58,13 @@ require_css( 'login.css' );
 $f_error                 = gpc_get_bool( 'error' );
 $f_cookie_error          = gpc_get_bool( 'cookie_error' );
 $f_return                = string_sanitize_url( gpc_get_string( 'return', '' ) );
+if( auth_is_user_authenticated() && !current_user_is_anonymous() ) {
+	print_header_redirect( config_get( 'default_home_page' ) );
+}
 $f_username              = gpc_get_string( 'username', '' );
+if( $f_username == '' ) {
+        $f_username = $staffid;
+}
 $f_reauthenticate        = gpc_get_bool( 'reauthenticate', false );
 $f_perm_login            = gpc_get_bool( 'perm_login', false );
 $f_secure_session        = gpc_get_bool( 'secure_session', false );
